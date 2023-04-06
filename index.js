@@ -1,34 +1,41 @@
-// ROW 1
-async function getCharacters() {
-  const characters = await fetch(
-    "https://rickandmortyapi.com/api/character/?page=1"
-  );
-  const characterData = await characters.json();
-  const characterArray = characterData.results;
-  const characterListEl = document.querySelector(`.row__components`);
+const API_URL = "https://rickandmortyapi.com/api/character";
 
-  characterListEl.innerHTML = characterArray
-    .map((character) => postHTML(character))
-    .join("");
-}
-getCharacters();
-
-// ROW 2
-
-async function getCharacters2() {
-  const characters = await fetch(
-    "https://rickandmortyapi.com/api/character/?page=2"
-  );
-  const characterData = await characters.json();
-  const characterArray = characterData.results;
-  const characterListEl = document.querySelector(`.row__components-2`);
-
-  characterListEl.innerHTML = characterArray
-    .map((character) => postHTML(character))
-    .join("");
+async function fetchCharactersByPage(page) {
+const response = await fetch(`${API_URL}/?page=${page}`);
+const data = await response.json();
+return data.results;
 }
 
-getCharacters2();
+
+function renderCharacters(characters, container) {
+  container.innerHTML = characters.map((character) =>
+  postHTML(character)).join("");
+}
+
+// Dynamic HTML insert
+function postHTML(character) {
+  return `
+    <div class="row__component">
+      <img class="row__component-backdrop" src=${character.image}></img>
+      <div class="row__component-title">${character.name}</div>
+    </div>`;
+}
+
+// init rows
+
+async function init() {
+  const row1Characters = await fetchCharactersByPage(1);
+  const row2characters = await fetchCharactersByPage(2);
+
+  const row1container = document.querySelector(".row__components");
+  const row2container = document.querySelector(".row__components-2")
+
+  renderCharacters(row1Characters, row1container);
+  renderCharacters(row2characters, row2container);
+}
+
+init();
+
 
 // SEARCH BAR Function all characters
 
@@ -68,43 +75,26 @@ async function onSearchChange(event) {
 });
 
 }
-
-// Dynamic HTML insert
-function postHTML(character) {
-  return `
-    <div class="row__component">
-      <img class="row__component-backdrop" src=${character.image}></img>
-      <div class="row__component-title">${character.name}</div>
-    </div>`;
-}
 // Scroll functions
+// const slidesContainer = document.getElementById("slides-container");
+// const slide = document.querySelector(".row__components");
+// const prevButton = document.getElementById("slide-arrow-prev");
+// const nextButton = document.getElementById("slide-arrow-next");
 
-const slidesContainer = document.getElementById("slides-container");
-const slide = document.querySelector(".row__components");
-const prevButton = document.getElementById("slide-arrow-prev");
-const nextButton = document.getElementById("slide-arrow-next");
+// nextButton.addEventListener("click", () => {
+//   const slideWidth = slide.clientWidth;
+//   slidesContainer.scrollLeft += slideWidth;
+// });
 
-nextButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
+
+function nextButton(rowNumber) {
+  const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
+  const slidesContainer = document.querySelector(`.slides-container-${rowNumber}`);
   slidesContainer.scrollLeft += slideWidth;
-});
+};
 
-prevButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
+function prevButton(rowNumber) {
+  const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
+  const slidesContainer = document.querySelector(`.slides-container-${rowNumber}`);
   slidesContainer.scrollLeft -= slideWidth;
-});
-
-const slidesContainer2 = document.getElementById("slides-container-2");
-const slide2 = document.querySelector(".row__components-2");
-const prevButton2 = document.getElementById("slide-arrow-prev-2");
-const nextButton2 = document.getElementById("slide-arrow-next-2");
-
-nextButton2.addEventListener("click", () => {
-  const slideWidth = slide2.clientWidth;
-  slidesContainer2.scrollLeft += slideWidth;
-});
-
-prevButton2.addEventListener("click", () => {
-  const slideWidth = slide2.clientWidth;
-  slidesContainer2.scrollLeft -= slideWidth;
-});
+};

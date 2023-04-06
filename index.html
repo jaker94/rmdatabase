@@ -20,26 +20,29 @@
             <input class="lp__input" text="" id="search_value"placeholder="Search the Multiverse here..." onchange="onSearchChange(event)"></input>
             </div>
         </div>
-        <div class="row">
-            <div class="row__header">Characters
-            </div>
+        <div class="row row__1">
             <div class="row__components--wrapper wrapper-1">
-                <i class="fas fa-chevron-left fa-xl arrow__top-left" id="slide-arrow-prev"></i>
-                <i class="fas fa-chevron-right fa-xl arrow__top-right" id="slide-arrow-next"></i>
-                <div class="row__components" id="slides-container">
-                
-                </div>
+              <button class="prev__btn prev__btn-2">
+                <i class="fas fa-chevron-left fa-xl arrow__top-left" id="slide-arrow-prev" onclick="{() => prevButton(1)}"></i>
+              </button>
+              <button class="next__btn">
+                <i class="fas fa-chevron-right fa-xl arrow__top-right" id="slide-arrow-next" onclick="{() => nextButton(1)}"></i>
+              </button>
+              <div class="row__components row__components-1" id="slides-container-1"></div>
             </div>
-        </div>
-        <div class="row row__2">
+          </div>
+          
+          <div class="row row__2">
             <div class="row__components--wrapper wrapper-2">
-                <i class="fas fa-chevron-left fa-xl arrow__bottom-left" id="slide-arrow-prev-2"></i>
-                <i class="fas fa-chevron-right fa-xl arrow__bottom-right" id="slide-arrow-next-2"></i>
-                <div class="row__components-2" id="slides-container-2">
-                
-                </div>
+              <button class="prev__btn">
+                <i class="fas fa-chevron-left fa-xl arrow__bottom-left" id="slide-arrow-prev-2" onclick="{() => prevButton(2)}"></i>
+              </button>
+              <button class="next__btn">
+                <i class="fas fa-chevron-right fa-xl arrow__bottom-right" id="slide-arrow-next-2" onclick="nextButton(2)"></i>
+              </button>
+              <div class="row__components row__components-2" id="slides-container-2"></div>
             </div>
-        </div>
+          </div>
     </main>
     
 </body>

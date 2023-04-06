@@ -61,7 +61,6 @@ a{
     height:60px;
     width:300px;
     padding-left:32px;
-    cursor:pointer;
     margin-top:8px;
 }
 
@@ -71,6 +70,30 @@ a{
 
 /* ROWS */
 
+.prev__btn, .next__btn{
+    height:30px;
+    width:30px;
+    background-color:white;
+    color:rgb(33, 211, 33);
+    border-radius:99px;
+    border:none;
+    position:absolute;
+    z-index:100;
+}
+
+.prev__btn{
+    top:60px;
+    left:-20px;
+}
+
+.prev__btn-2{
+    left:-12px;
+}
+
+.next__btn{
+    top:60px;
+    right:-35px;
+}
 
 .row{
     padding-top:96px;
@@ -112,38 +135,8 @@ a{
     justify-content: center;
 }
 
-
-.arrow__top-left{
-    position:absolute;
-    top:75px;
-    left:27px;
-    z-index:50;  
-}
-
-.arrow__top-right{
-    position:absolute;
-    top:75px;
-    right:24px;
-    z-index:50;
-}
-
-.arrow__bottom-left{
-    position:absolute;
-    top:75px;
-    left:20px;
-    z-index: 50;
-}
-
-.arrow__bottom-right{
-    position:absolute;
-    top:75px;
-    right:22px;
-    z-index: 50;
-}
-
-
 .fa-chevron-left:hover, .fa-chevron-right:hover {
-    transform: scale(1.55);
+    transform: scale(1.05);
     cursor:pointer
 }
 
