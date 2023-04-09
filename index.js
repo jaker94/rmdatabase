@@ -89,12 +89,13 @@ async function onSearchChange(event) {
 
 function nextButton(rowNumber) {
   const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
-  const slidesContainer = document.querySelector(`.slides-container-${rowNumber}`);
+  const slidesContainer = document.getElementById(`slides-container-${rowNumber}`);
   slidesContainer.scrollLeft += slideWidth;
 };
 
 function prevButton(rowNumber) {
+  console.log('worked')
   const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
-  const slidesContainer = document.querySelector(`.slides-container-${rowNumber}`);
+  const slidesContainer = document.getElementById(`slides-container-${rowNumber}`);
   slidesContainer.scrollLeft -= slideWidth;
 };
