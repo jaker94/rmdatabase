@@ -1,18 +1,17 @@
 const API_URL = "https://rickandmortyapi.com/api/character";
 
 async function fetchCharactersByPage(page) {
-const response = await fetch(`${API_URL}/?page=${page}`);
-const data = await response.json();
-return data.results;
+  const response = await fetch(`${API_URL}/?page=${page}`);
+  const data = await response.json();
+  return data.results;
 }
-
 
 function renderCharacters(characters, container) {
-  container.innerHTML = characters.map((character) =>
-  postHTML(character)).join("");
+  container.innerHTML = characters
+    .map((character) => postHTML(character))
+    .join("");
 }
 
-// Dynamic HTML insert
 function postHTML(character) {
   return `
     <div class="row__component">
@@ -21,23 +20,18 @@ function postHTML(character) {
     </div>`;
 }
 
-// init rows
-
 async function init() {
   const row1Characters = await fetchCharactersByPage(1);
   const row2characters = await fetchCharactersByPage(2);
 
   const row1container = document.querySelector(".row__components");
-  const row2container = document.querySelector(".row__components-2")
+  const row2container = document.querySelector(".row__components-2");
 
   renderCharacters(row1Characters, row1container);
   renderCharacters(row2characters, row2container);
 }
 
 init();
-
-
-// SEARCH BAR Function all characters
 
 async function onSearchChange(event) {
   const name = event.target.value;
@@ -58,44 +52,42 @@ async function onSearchChange(event) {
   setTimeout(() => {
     rowLoading.classList.remove(`row__loading`);
     rowLoading.style.display = "block";
-  }, 1000); 
+  }, 1000);
 
   characterListEl.innerHTML = characterArray
     .map((character) => postHTML(character))
     .join("");
 
-    const loadedRows = document.querySelectorAll(".row__component");
-    loadedRows.forEach((row) => {
-      row.classList.add("loadedRows");
-    });
+  const loadedRows = document.querySelectorAll(".row__component");
+  loadedRows.forEach((row) => {
+    row.classList.add("loadedRows");
+  });
 
-    const childElements = rowLoading.querySelectorAll('.fa-chevron-left, .fa-chevron-right');
+  const childElements = rowLoading.querySelectorAll(
+    ".fa-chevron-left, .fa-chevron-right"
+  );
   childElements.forEach((child) => {
-  child.style.display = "none";
-});
-
+    child.style.display = "none";
+  });
 }
-// Scroll functions
-// const slidesContainer = document.getElementById("slides-container");
-// const slide = document.querySelector(".row__components");
-// const prevButton = document.getElementById("slide-arrow-prev");
-// const nextButton = document.getElementById("slide-arrow-next");
-
-// nextButton.addEventListener("click", () => {
-//   const slideWidth = slide.clientWidth;
-//   slidesContainer.scrollLeft += slideWidth;
-// });
-
 
 function nextButton(rowNumber) {
-  const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
-  const slidesContainer = document.getElementById(`slides-container-${rowNumber}`);
+  const slideWidth = document.querySelector(
+    `.row__components-${rowNumber}`
+  ).clientWidth;
+  const slidesContainer = document.getElementById(
+    `slides-container-${rowNumber}`
+  );
   slidesContainer.scrollLeft += slideWidth;
-};
+}
 
 function prevButton(rowNumber) {
-  console.log('worked')
-  const slideWidth = document.querySelector(`.row__components-${rowNumber}`).clientWidth;
-  const slidesContainer = document.getElementById(`slides-container-${rowNumber}`);
+  console.log("worked");
+  const slideWidth = document.querySelector(
+    `.row__components-${rowNumber}`
+  ).clientWidth;
+  const slidesContainer = document.getElementById(
+    `slides-container-${rowNumber}`
+  );
   slidesContainer.scrollLeft -= slideWidth;
-};
+}
